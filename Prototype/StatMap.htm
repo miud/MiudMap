@@ -4,16 +4,17 @@
 		<title>Map of China</title>
 		<meta charset="utf-8"> 
 
-		<script type="text/javascript" src="jquery.min.js"></script>
-		<script type="text/javascript" src="raphael.js"></script>
-		<script type="text/javascript" src="scale.raphael.js"></script>
+		<script type="text/javascript" src="libs/jquery.min.js"></script>
+		<script type="text/javascript" src="libs/raphael.js"></script>
+		<script type="text/javascript" src="libs/scale.raphael.js"></script>
+		<script type="text/javascript" src="Config.js"></script>
 		<script type="text/javascript">
-			var map_jsondata = "provs.json";
+			var map_jsondata = "Popul.json";
 			var map_divid = "chnmap";
-			var map_divwidth = 580;
+			var map_divwidth = 600;
 			var map_divheight = 460;
 		</script>
-		<script type="text/javascript" src="m.cn.js"></script>
+		<script type="text/javascript" src="libs/chart.cn.js"></script>
 
 		<style type="text/css">
 			body, html{
@@ -27,11 +28,11 @@
 				margin: -150px 0 0 -300px;
 				position: absolute;
 				top: 25%;
-				width: 730px;
+				width: 750px;
 				border:1px solid black;
 			}
 			#chnmap{
-				/* background-color: #679; */
+				/* background-color: #679;  commented */
 			}
 
 			#canvas .state {

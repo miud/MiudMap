@@ -21,27 +21,23 @@ $(function(){
 		map_divheight = 460;
 	}
 
-	// $.getJSON('provs.json', function(data) {
 	$.getJSON(map_jsondata, function(data) {
-		$.each(data, function(i, d) {
-			var td = parseInt(d);
-			if (minC > td) minC = d;
-			if (maxC < td) maxC = d;
+		var paper = new ScaleRaphael(map_divid,600,460); 
 
-			c += td;
-		});
-
-		var paper = new ScaleRaphael(map_divid,600,460);
-
-		paper.changeSize(map_divwidth, map_divheight, true, false); // chnmap size (background setting)
-
+		paper.changeSize(map_divwidth, map_divheight, true, false); 
 
 		var attr = {
-			fill: "#eee",
-			stroke: "#666",
-			"stroke-width": 0.3,
+			fill: MapFillColor,
+			"stroke-width": 0.6,
+			"stroke-dasharray": ". ",
 			"stroke-linejoin": "round"
-		};
+		}; 
+
+		var barcharattr = {
+			fill: BarFillColor,
+			stroke: "black",
+			"stroke-width": 0.5
+		}; 
 
 		var chn = {};
 		chn.henan = paper.path("m 401.56894,281.11582 1.40106,-1.55733 1.92671,-0.53504 0.48205,-3.51329 -0.78822,-2.31333 -0.26257,-2.5358 -2.05751,1.95596 -0.9636,-0.17818 -1.57645,-1.37814 -1.62053,-0.26676 -0.52566,-2.49101 -2.84622,-1.15717 -0.0436,-1.60011 1.88262,0.26576 1.57694,-2.44721 -0.43796,-1.29005 0.48156,-1.55733 1.9713,-0.8451 -0.65643,-3.46999 0.26257,-1.46823 0.87592,-0.57733 1.35746,0.0891 2.62724,3.07035 0.91952,-0.0448 2.18928,-2.04505 1.18258,-1.11237 -1.09489,-1.29005 -0.0451,-1.46975 -0.61284,-0.57782 -1.31239,-0.0448 -2.05799,-1.6449 -0.2118,-1.15239 -1.22494,-0.26098 -0.71143,0.43136 -2.058,0 -1.57545,0.66742 -1.00671,-0.8899 0,-1.06807 -1.40304,-0.80031 -1.48876,-1.24576 -2.93391,-0.53252 0.0877,-0.97849 0.96311,-1.02328 0.21798,-1.11237 1.96982,-1.64491 0.39436,-1.24676 5.82274,-5.73954 0.0436,-0.8909 -1.57644,0.93419 -4.24877,2.75677 -0.48205,-0.35586 0.21749,-1.46823 0.70425,-1.08871 -2.05329,-0.99963 -2.14569,1.33485 -1.31387,-0.84561 -1.62005,0.80081 -1.18357,-0.17818 -0.74462,-0.62263 -2.97801,-0.22197 -0.61284,-0.57732 -2.93317,-0.2008 0.0884,3.62654 -0.39389,5.2055 -5.51805,4.3151 -0.87591,0.22247 -1.35747,-0.49075 -1.18258,1.11237 -2.67183,-0.0891 -1.22668,0.53505 -0.43894,1.46823 -1.35648,-0.0901 -0.96311,0.71172 -2.45186,2.66969 -2.27747,0.26677 -0.87591,0.66692 -1.31338,0.40065 -1.13898,1.33435 -1.40107,0.66742 -2.84622,-0.22247 0.22443,0.80131 0.17538,1.11237 0.96311,0.84661 0.17538,1.24576 1.40106,0.57783 0.30667,3.11313 2.14222,2.40292 1.66315,1.46824 -0.0233,2.71172 4.35826,5.02958 1.18209,1.6897 1.83952,0.17818 0.9631,0.97748 4.02732,1.15767 1.00571,0.17818 2.10358,-0.71171 1.22717,0.49024 3.06421,-1.28954 1.44516,0 2.14618,1.20146 2.66985,-1.82409 0.56875,0.26677 0.21898,3.4257 0.48205,1.24677 2.0139,1.95797 2.27698,-0.93469 1.22667,0.97748 1.22717,-0.35586 0.48205,0.40065 0.0877,1.11338 2.49745,1.15516 2.14568,-0.31157 0.70054,-1.37914 0.9631,0.44546 0.26159,1.06757 1.4672,0.39915 z").attr(attr);
@@ -77,65 +73,70 @@ $(function(){
 		chn.hainan = paper.path("m 357.0366,417.6205 2.5668,0.44948 1.5923,-0.35988 0.44291,-0.80735 3.27278,-0.45099 4.51086,-1.70782 0.70895,0.26979 0,1.7964 0.97302,3.68644 -2.5668,2.96666 -1.32675,2.87707 -0.44291,3.14584 -0.35374,2.33699 -2.21207,0.53908 -1.76917,2.24739 -0.0887,0.98855 -3.36147,0.54059 0,1.79741 -2.21207,0.35988 -1.06269,-0.98905 -3.00773,0.17868 -2.1224,-0.98855 -2.6535,-1.16875 -0.97352,-3.68391 -0.4434,-2.42658 0.4434,-1.16825 -0.35373,-1.25834 0.61928,-1.34843 3.80438,-2.69637 2.0357,-1.52712 -1.23856,-0.0906 0,-1.07865 1.06219,-0.72028 1.94653,0.0911 0.70846,-0.35989 0,-0.89845 1.50163,-0.54209 z").attr(attr);
 		chn.beijing = paper.path("m 402.66292,190.67776 -0.24771,-1.19542 c -0.71045,-0.55381 -1.37507,-1.11307 -1.91978,-1.8246 l 1.17664,-0.88083 0.92892,0 0.68121,-0.44042 1.11471,-0.12584 1.54821,-1.82459 -1.42435,-1.19542 -0.49543,-1.19543 0.18579,-1.1325 1.11471,-0.94376 -0.4335,-1.00667 -1.23857,0.3775 -0.55735,-0.3775 -0.74314,0.75501 -1.05278,-0.37751 c -0.97623,-0.91702 -1.97101,-1.81373 -2.91063,-2.76834 l -1.23856,0.3775 -0.86699,1.25834 0,0.755 -0.99086,-0.3775 0.55736,2.07626 -1.67206,0.18875 -0.867,1.00667 -0.92892,0.44042 -0.37157,1.19543 1.05278,1.1325 -0.30964,1.63584 -1.61014,0.56626 -0.99085,1.88751 -0.37157,2.07626 0.867,1.57292 2.04363,1.32126 1.61013,-0.50334 1.23857,0 0.80506,-0.3775 1.67207,0.94375 0.80506,-0.18875 0.0619,-0.88083 0.80507,-0.69209 1.91977,-0.31459 z").attr(attr);
 
+		var Summary = new Array();
+		Summary[0] = 0;
+		Summary[1] = 0;
+		Summary[2] = 0;
+		Summary[3] = 0;
+		$.each(data, function(i, d) {
+			// alert(d); ie reached; chrome didn't reach
+			for (var fldKey in d) {
+				if (fldKey > 2 && isNaN(d[fldKey]) == false) {
+					Summary[fldKey-3] += d[fldKey];
+				}
+			}
+			if (ShowCityName == true) {
+				DrawPoint(paper, d, 0, barcharattr);
+			}
+		});
+
+		for (var DataRow in data) {
+			DrawChart(paper, data[DataRow], Summary, barcharattr);
+		}
 		var current = null;
 		for (var state in chn) {
-			// alert(state);
 			(function (st, state) {
-				st[0].style.cursor = "pointer";
-				var colorstr = getColor(data[state],maxC);
 				st[0].onmouseover = function () {
-					current && chn[current].animate({fill: colorstr, stroke: "#666"}, 500) && (document.getElementById(current).style.display = ""); // for ie refill
-					st.animate({fill: "#fff", stroke: "#666"}, 500);
-					st.toFront();
-					// R.safari();
+					current && (document.getElementById(current).style.display = ""); 
 					document.getElementById(state).style.display = "block";
 					current = state;
 				};
 				st[0].onmouseout = function () {
-					st.animate({fill: colorstr, stroke: "#666"}, 500);
-					st.toFront();
-					// R.safari();
 				};
 			})(chn[state], state);
+			
 		}
 
-		// chn["guangdong"].animate({fill: "#3ff", stroke: "#666"}, 500);
-
 		$.each(data, function(i, d) {
-			// paint each provs
-			
-			chn[i].animate({fill: getColor(d, maxC), stroke: "#666"}, 500);
-
-			$('<div id="' + i + '" class="state"><h2>' + i + '</h2><p>' + d + '</p></div>').appendTo("#canvas"); 
+			var detail = '<p>数据一（中右）：' + d[3] + '</p><p>数据二（中左）：' + d[4] + '</p><p>数据三（最右）：' + d[5] + '</p><p>数据四（最左）：' + d[6] + '</p>';
+			$('<div id="' + i + '" class="state"><h2>' + d[2] + '</h2>' + detail + '</div>').appendTo("#canvas"); 
 
 		});
 
 	});
 });
 
-function getColor(depth, maxnum)
-{
-	var ColorDepth = parseInt(depth) / maxnum;
-	var ColorName = "#F3"; //4747~#FBBDBD
-	if (ColorDepth > 0.5) {
-		ColorName += "5858";
-	}
-	else if (ColorDepth > 0.4) {
-		ColorName += "7070";
-	}
-	else if (ColorDepth > 0.3) {
-		ColorName += "8282";
-	}
-	else if (ColorDepth > 0.2) {
-		ColorName += "9494";
-	}
-	else if (ColorDepth > 0.1) {
-		ColorName += "A6A6";
-	}
-	else {
-		ColorName += "B8B8";
-	}
-	return (ColorName);
+function DrawPoint(p, d, r, atr) {
+	p.circle(d[0],d[1],r).attr(atr);
+	p.text(d[0],d[1]+6,d[2]);
 }
 
+function DrawChart(p, d, sum, catr) {
+	for (var k in sum) {
+		var g = parseInt(k) + 3;
+		if (sum[k] != null && sum[k] != 0) {
+			var amt = 0;
+			if (d[g] != null) amt = d[g];
+			var perc = (amt / sum[k]) * FullHeight;
+			if (perc == 0) perc = 0.1;
 
+			if (k % 2 == 0) { 
+				// elem.attr() for IE?
+				p.rect(d[0] + (k/2|0)*BarWidth, d[1] - perc, BarWidth, perc).attr(catr);
+			} else {
+				p.rect(d[0] - ((k/2|0)+1)*BarWidth, d[1] - perc, BarWidth, perc).attr(catr);
+			}
+
+		}
+	}
+}
